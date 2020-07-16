@@ -3,40 +3,58 @@
   "handler": "Microsoft.Azure.CreateUIDef",
   "version": "0.1.2-preview",
   "parameters": {
-    "basics": [],
-    "steps": [
+    "basics": [
       {
-        "name": "applicationSettings",
-        "label": "Application settings",
-        "subLabel": {
-          "preValidation": "Configure the infrastructure settings",
-          "postValidation": "Done"
+        "name": "username",
+        "type": "Microsoft.Common.TextBox",
+        "label": "User name",
+        "defaultValue": "",
+        "toolTip": "Use only allowed characters",
+        "constraints": {
+          "required": true,
+          "regex": "^[a-z0-9A-Z]{6,30}$",
+          "validationMessage": "Only alphanumeric characters are allowed, and the value must be 6-30 characters long."
         },
-        "bladeTitle": "Application settings",
-        "elements": [
-          {
-            "name": "storageAccount",
-            "type": "Microsoft.Storage.StorageAccountSelector",
-            "label": "Storage account",
-            "toolTip": "Specify storage account name",
-            "constraints": {
-              "allowedTypes": [
-                "Premium_LRS",
-                "Standard_LRS",
-                "Standard_GRS"
-              ]
-            },
-            "options": {
-              "hideExisting": true
-            },
-            "visible": true
-          }
-        ]
+        "visible": true
+      },
+      {
+        "name": "password",
+        "type": "Microsoft.Compute.CredentialsCombo",
+        "label": {
+          "password": "Password",
+          "confirmPassword": "Confirm password"
+        },
+        "toolTip": {
+          "password": ""
+        },
+        "constraints": {
+          "required": true
+        },
+        "options": {
+          "hideConfirmation": false
+        },
+        "osPlatform": "Windows",
+        "visible": true
+      },
+      {
+        "name": "dnsPrefix",
+        "type": "Microsoft.Common.TextBox",
+        "label": "DNS prefix",
+        "defaultValue": "",
+        "toolTip": "Use only allowed characters",
+        "constraints": {
+          "required": true,
+          "regex": "^[a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9]{3, 10}$",
+          "validationMessage": "Only alphanumeric characters are allowed, and the value must be 6-30 characters long."
+        },
+        "visible": true
       }
     ],
+    "steps": [],
     "outputs": {
-      "storageAccountName": "[steps('applicationSettings').storageAccount.name]",
-      "storageAccountType": "[steps('applicationSettings').storageAccount.type]",
+      "adminUsername": "[basics('username')]",
+      "adminPassword": "[basics('password').password]",
+      "dnsLabelPrefix": "[basics('dnsPrefix')]",
       "location": "[location()]"
     }
   }
