@@ -180,16 +180,29 @@
       }
     },
     {
+      "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+      "name": "[concat(variables('vmName'), 'ManagedIdentity')]",
+      "apiVersion": "2018-11-30",
+      "location": "[resourceGroup().location]"
+    },
+       
+    {
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2018-10-01",
       "name": "[variables('vmName')]",
       "location": "[parameters('location')]",
       "identity": {
-        "type": "SystemAssigned"
-      },
+         "type": "userAssigned",
+         "userAssignedIdentities": {
+             "[resourceID('Microsoft.ManagedIdentity/userAssignedIdentities/', concat(variables('vmName'), 'ManagedIdentity'))]": {}
+         }
+     },
+
+      
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
-        "[resourceId('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+        "[resourceId('Microsoft.Network/networkInterfaces/', variables('nicName'))]",
+        "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities/', concat(variables('vmName'), 'ManagedIdentity'))]"
       ],
       "properties": {
         "hardwareProfile": {
@@ -234,7 +247,7 @@
       }
     },
     {
-      "apiVersion": "2017-09-01",
+      "apiVersion": "2019-04-01-preview",
       "name": "[guid(resourceGroup().id)]",
       "type": "Microsoft.Authorization/roleAssignments",
       "dependsOn": [
@@ -242,9 +255,10 @@
       ],
       "properties": {
         "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'acdd72a7-3385-48ef-bd42-f606fba81ae7')]",
-        "principalId": "[reference(variables('vmName'), '2017-12-01', 'Full').identity.principalId]",
-        "scope": "[resourceGroup().id]",
-        "delegatedManagedIdentityResourceId": "[reference(variables('vmName'), '2017-12-01', 'Full').identity.principalId]"
+        "principalId": "[reference(concat('Microsoft.ManagedIdentity/userAssignedIdentities/',concat(variables('vmName'), 'ManagedIdentity'))).principalId]",
+        "scope": "[resourceGroup().id]"
+        ,
+        "delegatedManagedIdentityResourceId": "[resourceID('Microsoft.ManagedIdentity/userAssignedIdentities/', concat(variables('vmName'), 'ManagedIdentity'))]"
       }
     }
   ],
