@@ -59,3 +59,18 @@ roperty id '4c6bc73d-06d5-47ba-b410-f52fda0c49e8' at path 'properties.delegatedM
         ]
     }
 }
+
+
+
+curl : {"error":{"code":"AuthorizationFailed","message":"The client 'ebb5c870-197a-4aa7-8ec5-e8a1ccdb5db2' with object
+id 'ebb5c870-197a-4aa7-8ec5-e8a1ccdb5db2' does not have authorization to perform action
+'Microsoft.Solutions/applications/read' over scope '/subscriptions/23e7bbe9-70d2-4471-a1c0-27c12d0b2ba8/resourceGroups/
+mngd7203/providers/Microsoft.Solutions/applications/mngapp7203' or the scope is invalid. If access was recently
+granted, please refresh your credentials."}}
+At line:1 char:15
++ $ManagedApp = curl $managedAppUrl -H $Headers | Select-Object -Expand ...
++               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-WebRequest], WebExc
+   eption
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
+PS C:\Users\ercadmin> # Use this resource ID to emit usage

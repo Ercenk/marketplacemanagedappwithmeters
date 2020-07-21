@@ -1,0 +1,65 @@
+
+
+
+curl : {"error":{"code":"AuthorizationFailed","message":"The client 'ef47d3d8-103b-44e3-93a7-f75183f6ab91' with object
+id 'ef47d3d8-103b-44e3-93a7-f75183f6ab91' does not have authorization to perform action
+'Microsoft.Resources/subscriptions/resourceGroups/read' over scope
+'/subscriptions/23e7bbe9-70d2-4471-a1c0-27c12d0b2ba8/resourceGroups/mngdapprg' or the scope is invalid. If access was
+recently granted, please refresh your credentials."}}
+At line:1 char:22
++ $resourceGroupInfo = curl -Headers $Headers $managementUrl | select - ...
++                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-WebRequest], WebExc
+   eption
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
+PS C:\Users\ercadmin> $managedappId = $resourceGroupInfo.managedBy
+PS C:\Users\ercadmin>
+
+
+
+{
+    "status": "Failed",
+    "error": {
+        "code": "ResourceDeploymentFailure",
+        "message": "The resource operation completed with terminal provisioning state 'Failed'.",
+        "details": [
+            {
+                "code": "ApplianceDeploymentFailed",
+                "message": "The operation to create appliance failed. Please check operations of deployment 'mngdapp' under resource group '/subscriptions/23e7bbe9-70d2-4471-a1c0-27c12d0b2ba8/resourceGroups/mrg-ercazapp1-preview-20200716123936'. Error message: 'At least one resource deployment operation failed. Please list deployment operations for details. Please see https://aka.ms/DeployOperations for usage details.'",
+                "details": [
+                    {
+                        "code": "BadRequest",
+                        "message": "{\r\n  \"error\": {\r\n    \"code\": \"PrincipalNotFound\",\r\n    \"message\": \"Principal not found in tenant '72f988bf-86f1-41af-91ab-2d7cd011db47'. If you are attempting to PUT this role assignment in tenant 'dba46d5b-306d-4364-910b-4c1c394ffd65' then the delegatedManagedIdentityResourceId property must be specified.\"\r\n  }\r\n}"
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+
+THIS IS FOR THE RG WHERE THE MANAGED APP IS DEPLOYED
+
+mngd7203 
+
+roperty id '4c6bc73d-06d5-47ba-b410-f52fda0c49e8' at path 'properties.delegatedManagedIdentityResourceId' is invalid. Expect fully qualified resource Id that start with '/subscriptions/{subscriptionId}' or '/providers/{resourceProviderNamespace}/'.
+
+{
+    "status": "Failed",
+    "error": {
+        "code": "ResourceDeploymentFailure",
+        "message": "The resource operation completed with terminal provisioning state 'Failed'.",
+        "details": [
+            {
+                "code": "ApplianceDeploymentFailed",
+                "message": "The operation to create appliance failed. Please check operations of deployment 'mngdapp7202' under resource group '/subscriptions/23e7bbe9-70d2-4471-a1c0-27c12d0b2ba8/resourceGroups/mrg-mngdapp7202'. Error message: 'At least one resource deployment operation failed. Please list deployment operations for details. Please see https://aka.ms/DeployOperations for usage details.'",
+                "details": [
+                    {
+                        "code": "BadRequest",
+                        "message": "{\r\n  \"error\": {\r\n    \"code\": \"PrincipalNotFound\",\r\n    \"message\": \"Principal not found in tenant '72f988bf-86f1-41af-91ab-2d7cd011db47'. If you are attempting to PUT this role assignment in tenant 'dba46d5b-306d-4364-910b-4c1c394ffd65' then the delegatedManagedIdentityResourceId property must be specified.\"\r\n  }\r\n}"
+                    }
+                ]
+            }
+        ]
+    }
+}
