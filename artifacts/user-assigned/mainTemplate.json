@@ -257,8 +257,7 @@
         "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'acdd72a7-3385-48ef-bd42-f606fba81ae7')]",
         "principalId": "[reference(concat('Microsoft.ManagedIdentity/userAssignedIdentities/',concat(variables('vmName'), 'ManagedIdentity'))).principalId]",
         "scope": "[resourceGroup().id]",
-        "delegatedManagedIdentityResourceId": "[resourceID('Microsoft.ManagedIdentity/userAssignedIdentities/', concat(variables('vmName'), 'ManagedIdentity'))]"
-      }
+        "delegatedManagedIdentityResourceId": "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', concat(variables('vmName'), 'ManagedIdentity'))]"  }
     }
   ],
   "outputs": {
