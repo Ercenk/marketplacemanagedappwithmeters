@@ -1,0 +1,44 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
+  "handler": "Microsoft.Azure.CreateUIDef",
+  "version": "0.1.2-preview",
+  "parameters": {
+    "basics": [
+      {
+        "name": "funcName",
+        "type": "Microsoft.Common.TextBox",
+        "label": "Name of the function to be created",
+        "toolTip": "Name of the function to be created",
+        "visible": true,
+        "constraints": {
+          "required": true
+        }
+      },
+      {
+        "name": "storageName",
+        "type": "Microsoft.Common.TextBox",
+        "label": "Name of the storage to be created",
+        "toolTip": "Name of the storage to be created",
+        "visible": true,
+        "constraints": {
+          "required": true
+        }
+      },
+      {
+        "name": "zipFileBlobUri",
+        "type": "Microsoft.Common.TextBox",
+        "defaultValue": "https://github.com/Azure/azure-quickstart-templates/tree/master/101-custom-rp-with-function/artifacts/functionzip/functionpackage.zip",
+        "label": "The Uri to the uploaded function zip file",
+        "toolTip": "The Uri to the uploaded function zip file",
+        "visible": true
+      }
+    ],
+    "steps": [],
+    "outputs": {
+      "funcName": "[basics('funcName')]",
+      "storageName": "[basics('storageName')]",
+      "funcName": "[basics('funcName')]",
+      "location": "[location()]"
+    }
+  }
+}

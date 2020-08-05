@@ -1,3 +1,5 @@
+#!/bin/bash
+
 az login --identity
 az identity list 
 
